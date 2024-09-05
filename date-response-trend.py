@@ -15,7 +15,7 @@ volume_df = df.groupby(['Month-Day', 'Project']).size().unstack(fill_value=0)
 
 # Dates to highlight
 highlight_ssv2024_dates = ['2023-09-06', '2023-09-13', '2023-09-20', '2023-09-22', '2023-09-28']
-highlight_ssv2025_dates = ['2024-08-20', '2024-08-26', '2024-08-30', '2024-09-03']
+highlight_ssv2025_dates = ['2024-08-20', '2024-08-26', '2024-09-03']
 
 # Convert highlight dates to 'Month-Day' format
 highlight_ssv2024_dates = [pd.to_datetime(date).strftime('%m-%d') for date in highlight_ssv2024_dates]
