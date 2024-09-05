@@ -26,16 +26,17 @@ plt.figure(figsize=(12, 6))
 plt.plot(volume_df.index, volume_df['SSV2024'], label='SSV2024', color='blue')
 plt.plot(volume_df.index, volume_df['SSV2025'], label='SSV2025', color='red')
 
-# Add vertical lines for highlighted dates
+# Add vertical lines for highlighted dates with labels
 for date in highlight_ssv2024_dates:
     plt.axvline(x=date, color='blue', linestyle='--', linewidth=1)
+    plt.text(date, plt.ylim()[1], ' sent email', color='blue', rotation=90, verticalalignment='bottom')
 
 for date in highlight_ssv2025_dates:
     plt.axvline(x=date, color='red', linestyle='--', linewidth=1)
+    plt.text(date, plt.ylim()[1], ' sent email', color='red', rotation=90, verticalalignment='bottom')
 
 plt.xlabel('Date (Month-Day)')
 plt.ylabel('Volume')
-plt.title('Volume over Time for Projects')
 plt.legend(title='Project Year')
 plt.xticks(rotation=45)
 plt.grid(True)
