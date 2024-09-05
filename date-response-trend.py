@@ -13,13 +13,29 @@ df['Month-Day'] = df['Start Date'].dt.strftime('%m-%d')
 # Group by 'Month-Day' and 'Project' and count the occurrences
 volume_df = df.groupby(['Month-Day', 'Project']).size().unstack(fill_value=0)
 
+# Dates to highlight
+highlight_ssv2024_dates = ['2023-09-06', '2023-09-13', '2023-09-20', '2023-09-22', '2023-09-28']
+highlight_ssv2025_dates = ['2024-08-20', '2024-08-26', '2024-08-30', '2024-09-03']
+
+# Convert highlight dates to 'Month-Day' format
+highlight_ssv2024_dates = [pd.to_datetime(date).strftime('%m-%d') for date in highlight_ssv2024_dates]
+highlight_ssv2025_dates = [pd.to_datetime(date).strftime('%m-%d') for date in highlight_ssv2025_dates]
+
 # Plot the data
 plt.figure(figsize=(12, 6))
 plt.plot(volume_df.index, volume_df['SSV2024'], label='SSV2024', color='blue')
 plt.plot(volume_df.index, volume_df['SSV2025'], label='SSV2025', color='red')
+
+# Add vertical lines for highlighted dates
+for date in highlight_ssv2024_dates:
+    plt.axvline(x=date, color='blue', linestyle='--', linewidth=1)
+
+for date in highlight_ssv2025_dates:
+    plt.axvline(x=date, color='red', linestyle='--', linewidth=1)
+
 plt.xlabel('Date (Month-Day)')
 plt.ylabel('Volume')
-plt.title('Volume over Time for SSV2024 & SSV2025')
+plt.title('Volume over Time for Projects')
 plt.legend(title='Project Year')
 plt.xticks(rotation=45)
 plt.grid(True)
